@@ -131,10 +131,6 @@ function App(state) {
       padding:.3rem .7rem;font-size:.74rem;font-weight:700;white-space:nowrap;
       transition:background .16s var(--ease-out);}
     .theme-toggle-btn:hover{background:rgba(255,255,255,.16);}
-    .mobile-preview-frame-wrap{display:flex;justify-content:center;padding:var(--space-4) 0;}
-    .mobile-preview-frame{width:375px;max-width:100%;height:700px;border:9px solid #18191f;
-      border-radius:34px;overflow:hidden;box-shadow:0 24px 60px -22px rgba(0,0,0,.4);flex-shrink:0;}
-    .mobile-preview-frame iframe{width:100%;height:100%;border:none;display:block;background:#fff;}
     .topbar{
       position:sticky;top:env(safe-area-inset-top,0px);z-index:20;
       display:flex;align-items:center;justify-content:flex-end;gap:.7rem;
@@ -677,21 +673,6 @@ App(JSON.parse(document.getElementById('app-state').textContent));
         render();
       });
       right.appendChild(themeBtn);
-
-      const mobileBtn = el(`<button type="button" class="theme-toggle-btn" id="mobile-preview-btn"
-        title="Solo para probar este prototipo — la versión final ya es responsive sola, sin este botón"
-        aria-label="Ver vista móvil (solo para pruebas)">📱 Vista móvil</button>`);
-      mobileBtn.addEventListener('click', () => {
-        openModal('Vista móvil · prototipo', (body) => {
-          body.style.padding = '0';
-          const frameWrap = el(`<div class="mobile-preview-frame-wrap">
-            <div class="mobile-preview-frame"><iframe title="Vista previa móvil"></iframe></div>
-          </div>`);
-          body.appendChild(frameWrap);
-          frameWrap.querySelector('iframe').srcdoc = buildFullDocument(state);
-        });
-      });
-      right.appendChild(mobileBtn);
     }
     right.appendChild(el(`<div class="bp-badge">${BP_LOGO_SVG}</div>`));
 
@@ -705,7 +686,7 @@ App(JSON.parse(document.getElementById('app-state').textContent));
   function renderLogin() {
     const page = el(`<div class="login-page"></div>`);
     const videoWrap = el(`<div class="bg-video-wrap">
-      <video class="bg-video" autoplay muted loop playsinline preload="auto">
+      <video class="bg-video" autoplay muted loop playsinline preload="auto" poster="/assets/bg-video-poster.jpg">
         <source src="/assets/bg-video2-540p.mp4" type="video/mp4">
       </video>
       <div class="bg-video-fade"></div>
