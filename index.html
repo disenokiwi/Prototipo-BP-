@@ -704,12 +704,23 @@ App(JSON.parse(document.getElementById('app-state').textContent));
   // ---------------- Login ----------------
   function renderLogin() {
     const page = el(`<div class="login-page"></div>`);
-    page.appendChild(el(`<div class="bg-video-wrap">
+    const videoWrap = el(`<div class="bg-video-wrap">
       <video class="bg-video" autoplay muted loop playsinline preload="auto">
         <source src="/assets/bg-video2-540p.mp4" type="video/mp4">
       </video>
       <div class="bg-video-fade"></div>
-    </div>`));
+    </div>`);
+    page.appendChild(videoWrap);
+    const bgVideo = videoWrap.querySelector('video');
+    if (bgVideo) {
+      const tryPlay = () => bgVideo.play().catch(() => {});
+      tryPlay();
+      // Algunos navegadores móviles (Safari en modo bajo consumo, ahorro de datos) bloquean
+      // el autoplay incluso con muted+playsinline; reintentar tras el primer toque del usuario.
+      const retryOnGesture = () => { tryPlay(); document.removeEventListener('touchend', retryOnGesture); document.removeEventListener('click', retryOnGesture); };
+      document.addEventListener('touchend', retryOnGesture, { once: true });
+      document.addEventListener('click', retryOnGesture, { once: true });
+    }
     page.appendChild(renderBrandStrip(false));
     const screen = el(`<div class="login-screen"><div class="login-card">
       <h1>Gestión Gremial</h1>
