@@ -20,13 +20,18 @@ Este repo tiene **dos partes**:
 - Desplegar la Edge Function `generate-summary` con la API key de Anthropic.
 - Logos del gremio: hoy la ficha de gremio reserva un espacio para el logo (🏢 de placeholder) pero no hay integración con ninguna fuente de logos todavía.
 
+## Deploy de demo (Vercel)
+
+`index.html` en la raíz es una copia de `prototipo-visual.html`, para que la URL pública muestre el prototipo funcionando (con datos de ejemplo) sin necesitar Supabase. El scaffold de producción real vive en `app/index.html` + `src/` — se accede en `/app/` y hoy no carga sin `src/config.js` configurado. Cuando Supabase esté listo, mover `app/index.html` de vuelta a la raíz (y borrar la copia del prototipo, o dejarla como referencia en otra ruta).
+
 ## Estructura
 
 ```
 prototipo-visual.html         prototipo visual de referencia (ver arriba) — no es parte del build de producción
 prototipo-visual-backup-v15.html  respaldo de una versión intermedia del prototipo, se puede borrar
+index.html                    copia de prototipo-visual.html, servida en la raíz para el deploy de demo en Vercel
 
-index.html                    shell de la SPA de producción
+app/index.html                shell de la SPA de producción (ver "Deploy de demo" arriba)
 src/
   config.js                    credenciales de Supabase (gitignored, crear desde config.example.js)
   main.js                      bootstrap + rutas
