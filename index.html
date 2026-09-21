@@ -382,7 +382,7 @@ function App(state) {
     return `rgba(${GREMIO_HERO_PALETTE[index % GREMIO_HERO_PALETTE.length]},.1)`;
   }
 
-  const DASHBOARD_BG_URL = '/_blob/e92b3c3aaae1d6d62d2f942f84f3edad';
+  const DASHBOARD_BG_URL = '/assets/shutterstock_2758866407-v2.jpg';
 
   const USERS = [
     { id: 'u-andres', nombre: 'Andrés Lozano', iniciales: 'AL', rol: 'delegado', email: 'alozano@keyword.com.ec' },
@@ -699,7 +699,7 @@ App(JSON.parse(document.getElementById('app-state').textContent));
     const page = el(`<div class="login-page"></div>`);
     page.appendChild(el(`<div class="bg-video-wrap">
       <video class="bg-video" autoplay muted loop playsinline preload="auto">
-        <source src="/_blob/a73e7de5c9d88f6dd7076b4ef14cc0c5" type="video/mp4">
+        <source src="/assets/bg-video2-540p.mp4" type="video/mp4">
       </video>
       <div class="bg-video-fade"></div>
     </div>`));
